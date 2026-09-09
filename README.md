@@ -1,25 +1,28 @@
 # Fractal Lab
 
-A local visual workspace with a left sidebar for **Moodboards** and **Experiments**. Moodboards includes image galleries, clipboard and drag-and-drop imports, and agent-readable image tags. Personal boards stay on your computer; the repository contains only the reusable app and documentation.
+A local visual workspace for Mirror Physics, maintained at [mp-jamesx/fractal-lab](https://github.com/mp-jamesx/fractal-lab), with a left sidebar for **Moodboards** and **Experiments**. Moodboards includes image galleries, clipboard and drag-and-drop imports, and agent-readable image tags. Personal boards stay on your computer; the repository contains only the reusable app and documentation.
 
 ## Run locally
 
 ```sh
+git clone https://github.com/mp-jamesx/fractal-lab.git
 cd fractal-lab
 npm ci
+npm ci --prefix experiments
 npm run dev
 ```
 
-Run these commands from your cloned project directory. Use Node.js 22.12+ (or a newer supported LTS release) and npm. Open http://127.0.0.1:8765. Stop with Ctrl+C.
+For an existing checkout, skip the clone step and run the install commands from its root. Use Node.js 22.12+ (or a newer supported LTS release) and npm. Open [Fractal Lab locally](http://127.0.0.1:8765). Stop with Ctrl+C.
 
-On first startup, the app creates an empty `catalog.json` and `images/inbox/`. Existing libraries are preserved. Click the + tile to create your first board. After installing dependencies, normally just run `npm run dev`.
+On first startup, the app creates an empty `catalog.json` and `images/inbox/`. Existing libraries are preserved. Click **Create moodboard** in an empty library, or the **+** tile beside existing boards, to create a board. After installing dependencies, normally just run `npm run dev`.
 
 Click a moodboard to see its images, then click an image to enlarge it. Use Previous/Next or arrow keys to move between images; Escape closes the viewer. Open original shows the full-resolution file.
 
 ## Add boards and images
 
-- Click the **+ New moodboard** tile on the home page, enter a name, and click **Create moodboard**. This creates a folder under `images/` and updates `catalog.json`.
+- Click **Create moodboard** in an empty library or the **+** tile on the Moodboards page, enter a name, and click **Create moodboard**. This creates a folder under `images/` and updates `catalog.json`.
 - Open a moodboard and press **Cmd+V** with an image on the clipboard, or drag one or more image files anywhere onto the board. Files save automatically to that board's folder; the gallery updates immediately.
+- Empty moodboards also offer **Choose images** to open the file picker.
 - Supported formats: PNG, JPEG, WebP, GIF, and AVIF, up to 50 MB per image. Clipboard image data is supported; pasting an image URL alone does not download it.
 - Unique filenames prevent overwriting existing images. Failures appear above the images; successful clipboard and library actions are silent.
 - Press **Cmd+Z** (or Ctrl+Z) to undo the most recent successful paste/drop batch on the current board. Undo removes those added files from disk. The last 50 addition batches per board are tracked in the current tab until reload; native undo still works in text fields.
@@ -90,20 +93,43 @@ Inspect new images before tagging, preserve other entries, and use consistent ph
 
 ## What belongs in Git
 
-Commit `.gitignore`, `AGENTS.md`, `README.md`, `package.json`, `package-lock.json`, `index.html`, `vite.config.js`, `serve.py`, `src/`, and `server/` (including tests).
+Commit `.gitignore`, `AGENTS.md`, `README.md`, `package.json`, `package-lock.json`, `index.html`, `vite.config.js`, `serve.py`, `src/`, `server/` (including tests), `scripts/`, `shared/`, and the source and manifests under `experiments/`.
 
 The ignore rules exclude all personal boards: `images/` including every `tags.json`, `catalog.json`, and `cache/`. Dependencies, build output, logs, and local environment files are also ignored. No image placeholders or personal catalog are needed for a fresh clone.
 
-Keep a separate backup of your local library. To move a library between your own machines, copy `catalog.json` and `images/` together outside Git. Do not force-add these paths to the repository.
+Keep a separate backup of your local library. To move a library between your own machines, copy `catalog.json` and `images/` together outside Git, along with any local media in `experiments/assets/` and `experiments/public/`. Do not force-add these paths to the repository.
 
 Deletion validation covers actual file removal, shared-board records, tag preservation, symlink/traversal rejection, concurrent uploads/deletes, and metadata rollback on unlink failure. Paste → Cmd+Z, context-menu deletion, and the hover delete button were also verified in an isolated temporary library with synthetic images.
 
 ## Experiments section
 
-Experiments lives inside this repository at `experiments/`. Open the Experiments tab to browse the three live Three.js/p5.js collections. The Lab server serves `experiments/dist-lab` under `/lab-experiments/`; no second server or external project path is needed.
+Experiments lives inside this repository at `experiments/`. Open the Experiments tab to browse three live Three.js/p5.js collections: **3D M logo**, **Blog thumbnails**, and **Editorial thumbnails**. Breadcrumbs appear on the collection page and inside each experiment; **All experiments** returns to the collection. Moodboard and experiment cards share the same background-only hover treatment. The Lab server serves `experiments/dist-lab` under `/lab-experiments/`; no second server or external project path is needed.
 
 After cloning, run `npm ci` in the repository root and `npm ci --prefix experiments`, then `npm run dev`. Development and production builds run `npm run build:experiments` first. After changing experiment code, run that command again and reopen the Experiments tab. Standalone development remains available with `npm run dev --prefix experiments` on port 8770.
 
 Commit experiment source, small source SVGs, coordinate JSON, documentation, and dependency manifests. Keep large personal media in `experiments/assets/` or `experiments/public/`; both directories are ignored, along with experiment dependencies, build output, caches, and exports. Vite copies `public/` to the build for local serving. Use its configured base path when referencing those files. A new clone needs a separate local copy of any personal assets it uses.
 
 Empty library, empty board, missing board, and loading/error views share a local composition using the existing Mirror M outlines and Fractal typography, spacing, and semantic colors. Empty boards support choosing images as well as dropping or pasting them.
+
+## Repository layout
+
+```text
+fractal-lab/
+├── src/                 # React shell and moodboard interactions
+├── server/              # Local library API, experiment serving, and tests
+├── shared/              # Styles shared by both collection pages
+├── scripts/             # Integrated experiment build
+├── experiments/         # Experiment source and its own npm manifest
+│   ├── src/             # Three.js/p5.js artwork and navigation
+│   ├── assets/          # Optional local media (ignored)
+│   ├── public/          # Optional local static files (ignored)
+│   └── dist-lab/        # Generated embedded build (ignored)
+├── images/              # Personal originals and tags (ignored)
+└── catalog.json         # Personal library metadata (ignored)
+```
+
+If your checkout still points to the former repository name, update it:
+
+```sh
+git remote set-url origin https://github.com/mp-jamesx/fractal-lab.git
+```
