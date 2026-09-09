@@ -4,6 +4,7 @@ import { Button, Card, Chip, Link, Modal, Input, Label } from '@mirror-physics/f
 import '@mirror-physics/fractal-ui/tokens.css';
 import '@mirror-physics/fractal-ui/css';
 import './style.css';
+import { Experiments } from './Experiments.jsx';
 import '../shared/collection.css';
 import { Trash, Palette, Beaker } from '@mirror-physics/fractal-icons';
 import { LabEmptyState, MirrorStudy } from './LabEmptyState.jsx';
@@ -29,7 +30,7 @@ export function ImageTags({tags=[]}) {
 }
 export function App() {
   const [data,setData] = useState(null), [error,setError] = useState(false), [id,setId] = useState(route), [selected,setSelected] = useState(null);
-  const showingExperiments = id === '/experiments';
+  const showingExperiments = id === '/experiments' || id.startsWith('/experiments/');
   const boards = data?.boards || [];
   const board = boards.find(b => b.id === id);
   const refs = (data?.references || []).filter(r => r.boards.includes(id));
@@ -191,7 +192,7 @@ export function App() {
       </nav>
     </aside>
     <div className="lab-content">
-    {showingExperiments ? <main className="experiments-section" aria-label="Experiments"><iframe src="/lab-experiments/" title="Fractal Lab experiments" className="experiments-frame" /></main> : <>
+    {showingExperiments ? <Experiments route={id}/> : <>
     <main aria-busy={uploading} className={multiSelection.length ? 'has-batch-selection' : undefined}>
       <nav className="breadcrumb" aria-label="Breadcrumb">{id ? <><Link href="#" theme="muted">All moodboards</Link><span aria-hidden="true">/</span><span aria-current="page">{board?.name || 'Not found'}</span></> : <span aria-current="page">All moodboards</span>}</nav>
       <section className="page-heading"><div><h1 className="display-01">{id ? board?.name || 'Board not found' : 'Moodboards'}</h1></div>{data && <Chip tone="neutral">{id ? refs.length+' references' : boards.length+' moodboard'+(boards.length===1?'':'s')}</Chip>}</section>

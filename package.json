@@ -7,16 +7,15 @@
     "dev": "vite --host 127.0.0.1 --port 8765 --strictPort",
     "build": "vite build",
     "preview": "vite preview --host 127.0.0.1 --port 8765 --strictPort",
-    "test": "node --test server/*.test.js",
-    "build:experiments": "node scripts/build-experiments.js",
-    "predev": "npm run build:experiments",
-    "prebuild": "npm run build:experiments"
+    "test": "node --test server/*.test.js"
   },
   "dependencies": {
     "@mirror-physics/fractal-icons": "^0.4.2",
     "@mirror-physics/fractal-ui": "^0.1.2",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
-    "vite": "^8.2.2"
+    "vite": "^8.2.2",
+    "three": "^0.180.0",
+    "p5": "^2.3.3"
   }
 }

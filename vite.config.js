@@ -1,4 +1,3 @@
-import { createExperimentsFiles } from './server/experiments.js';
 import { hydrateTags } from './server/tags.js';
 import { createLibraryAPI } from './server/library.js';
 import { defineConfig } from 'vite';
@@ -10,7 +9,6 @@ const root = import.meta.dirname;
 const libraryAPI = createLibraryAPI(root);
 function libraryFiles(server) {
   server.middlewares.use(libraryAPI);
-  server.middlewares.use(createExperimentsFiles(resolve(root,'experiments/dist-lab')));
   server.middlewares.use(async (req, res, next) => {
     let path;
     try { path = decodeURIComponent(new URL(req.url, 'http://localhost').pathname); } catch { return next(); }

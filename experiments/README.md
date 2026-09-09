@@ -4,13 +4,7 @@ Local Vite app for Mirror Physics visual experiments using Three.js and p5.js.
 
 ## Run
 
-```sh
-cd experiments
-npm install
-npm run dev
-```
-
-Open http://127.0.0.1:8770. `npm run build` creates the production build.
+From the Fractal Lab repository root, run `npm ci` and `npm run dev`. Open http://127.0.0.1:8765/#/experiments. The single root `npm run build` includes all experiments in `dist/`.
 
 ## Form studies — Series 001
 
@@ -31,7 +25,7 @@ The parent agent reviewed all 12 Mirror branding references, then selected shuff
 | 09 | Chromatic Organ | 07 | 06 | 02 |
 
 - `src/home.js` and `src/home.css`: experiment library and live logo preview.
-- `src/main.js`: homepage, experiment, and original-model routing. Add new experiment metadata to `src/experiments.json` and its route/module to `src/main.js`.
+- `../../src/Experiments.jsx`: homepage, experiment, and original-model routing. Add new experiment metadata to `src/experiments.json` and its route/module to `../../src/Experiments.jsx`.
 - `src/pieces/piece01.js` through `piece09.js`: independent art modules exporting title, description, and createPiece().
 - `src/gallery.js`: scenes, cameras, orbit controls, gallery and expanded views.
 - `src/logo-utils.js`: source shapes, extrusion, point-in-logo sampling and seeded randomness.
@@ -39,7 +33,7 @@ The parent agent reviewed all 12 Mirror branding references, then selected shuff
 
 ## Original model
 
-The original matte gray extruded logo remains available at http://127.0.0.1:8770/?view=original. Drag to orbit, scroll to zoom, toggle Wireframe to inspect the triangles, or Reset view.
+The original matte gray extruded logo remains available at http://127.0.0.1:8765/#/experiments/original. Drag to orbit, scroll to zoom, toggle Wireframe to inspect the triangles, or Reset view.
 
 Its three outlines come from `../Blender/general-visuals/logo-tessellator/public/logo.svg`, copied into `src/mirror-logo.svg`. Three.js SVGLoader converts them to ExtrudeGeometry: depth 4, bevel size/thickness 0.25, three bevel segments. No textures or metallic reflections. Edit `src/single.js` and `src/single.css` for this view.
 
@@ -57,6 +51,6 @@ Ten live p5.js line drawings for ten actual Mirror Physics blog posts, using shu
 
 ## Fractal Lab integration
 
-This project lives in `fractal-lab/experiments`. Fractal Lab’s left sidebar serves this project within its Experiments section. From the repository root (`..`), run `npm run build:experiments` to create `dist-lab` with the `/lab-experiments/` base path. Normal standalone development on port 8770 and `dist` builds keep their original root paths. Navigation uses Vite’s configured base in both modes.
+Artwork modules export `mount(app)` and return a cleanup function. `src/Experiments.jsx` in the repository root lazy-loads and mounts each route directly into the React app. There is no iframe, nested npm manifest, separate server, or secondary build. Add collection metadata to `experiments/src/experiments.json` and register its loader in `src/Experiments.jsx`.
 
-Experiment UI uses the same Fractal UI Figtree fonts and semantic neutral colors as Moodboards, including system dark mode. `src/theme.css` supplies shared tokens; artwork canvas colors remain defined by each piece.
+Use hash routes under `#/experiments/` and the shared breadcrumbs helper. Scope experiment CSS to its `.experiment-*` view so it cannot restyle Moodboards or the sidebar. Clean up canvases, GPU resources, animation frames, listeners, and observers on unmount. Root Fractal tokens supply typography and theme colors; artwork palettes remain defined by each piece.
