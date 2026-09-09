@@ -17,3 +17,12 @@
 .env.*
 !.env.example
 .DS_Store
+
+# Experiment source is versioned; large local media and generated output are not.
+/experiments/node_modules/
+/experiments/dist/
+/experiments/dist-lab/
+/experiments/assets/
+/experiments/public/
+/experiments/cache/
+/experiments/outputs/

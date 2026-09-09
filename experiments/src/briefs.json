@@ -1,0 +1,265 @@
+[
+  {
+    "id": 1,
+    "palette": {
+      "source": "02",
+      "tags": [
+        "black and white",
+        "red",
+        "green",
+        "blue"
+      ]
+    },
+    "structure": {
+      "source": "09",
+      "tags": [
+        "interlocking rings",
+        "porous cellular mesh",
+        "overlapping volumes",
+        "dense irregular holes",
+        "central composition"
+      ]
+    },
+    "signal": {
+      "source": "07",
+      "tags": [
+        "psychedelic",
+        "energetic",
+        "computational"
+      ]
+    }
+  },
+  {
+    "id": 2,
+    "palette": {
+      "source": "03",
+      "tags": [
+        "electric blue",
+        "white"
+      ]
+    },
+    "structure": {
+      "source": "07",
+      "tags": [
+        "undulating volume",
+        "folded surface",
+        "dense dotted texture",
+        "isolated central form"
+      ]
+    },
+    "signal": {
+      "source": "09",
+      "tags": [
+        "intricate",
+        "meditative",
+        "sculptural"
+      ]
+    }
+  },
+  {
+    "id": 3,
+    "palette": {
+      "source": "11",
+      "tags": [
+        "deep violet",
+        "golden yellow",
+        "white"
+      ]
+    },
+    "structure": {
+      "source": "11",
+      "tags": [
+        "radial networks",
+        "fine curved connections",
+        "node-and-edge patterns",
+        "circular forms",
+        "three-column specimen grid"
+      ]
+    },
+    "signal": {
+      "source": "01",
+      "tags": [
+        "scientific",
+        "computational",
+        "intricate"
+      ]
+    }
+  },
+  {
+    "id": 4,
+    "palette": {
+      "source": "04",
+      "tags": [
+        "pale blue",
+        "white",
+        "dark blue"
+      ]
+    },
+    "structure": {
+      "source": "08",
+      "tags": [
+        "diagonal elliptical loop",
+        "spherical forms",
+        "tapered organic connectors",
+        "grainy shading",
+        "asymmetric composition"
+      ]
+    },
+    "signal": {
+      "source": "07",
+      "tags": [
+        "psychedelic",
+        "energetic",
+        "computational"
+      ]
+    }
+  },
+  {
+    "id": 5,
+    "palette": {
+      "source": "06",
+      "tags": [
+        "coral red",
+        "orange",
+        "deep teal",
+        "cream"
+      ]
+    },
+    "structure": {
+      "source": "05",
+      "tags": [
+        "curved planetary horizon",
+        "diagonal framing",
+        "small centered image",
+        "wide negative space",
+        "fine grid lines"
+      ]
+    },
+    "signal": {
+      "source": "10",
+      "tags": [
+        "experimental",
+        "fluid",
+        "playful"
+      ]
+    }
+  },
+  {
+    "id": 6,
+    "palette": {
+      "source": "05",
+      "tags": [
+        "muted blue",
+        "white",
+        "charcoal"
+      ]
+    },
+    "structure": {
+      "source": "03",
+      "tags": [
+        "looping linework",
+        "asymmetric composition",
+        "geometric logo",
+        "sans serif wordmark"
+      ]
+    },
+    "signal": {
+      "source": "04",
+      "tags": [
+        "educational",
+        "archival",
+        "analytical"
+      ]
+    }
+  },
+  {
+    "id": 7,
+    "palette": {
+      "source": "01",
+      "tags": [
+        "orange",
+        "golden yellow",
+        "charcoal",
+        "black"
+      ]
+    },
+    "structure": {
+      "source": "12",
+      "tags": [
+        "flowing point-cloud mesh",
+        "folded ribbon surfaces",
+        "luminous contour lines",
+        "chromatic edge fringing",
+        "isolated central form"
+      ]
+    },
+    "signal": {
+      "source": "09",
+      "tags": [
+        "intricate",
+        "meditative",
+        "sculptural"
+      ]
+    }
+  },
+  {
+    "id": 8,
+    "palette": {
+      "source": "10",
+      "tags": [
+        "cobalt blue",
+        "white",
+        "black"
+      ]
+    },
+    "structure": {
+      "source": "04",
+      "tags": [
+        "two-column diagram",
+        "sequential stages",
+        "clustered spheres",
+        "stippled shading",
+        "labeled cross-sections"
+      ]
+    },
+    "signal": {
+      "source": "02",
+      "tags": [
+        "retro scientific",
+        "bold",
+        "playful"
+      ]
+    }
+  },
+  {
+    "id": 9,
+    "palette": {
+      "source": "07",
+      "tags": [
+        "purple",
+        "magenta",
+        "orange red",
+        "golden yellow",
+        "black"
+      ]
+    },
+    "structure": {
+      "source": "06",
+      "tags": [
+        "vertically paired lobes",
+        "touching organic shapes",
+        "soft gradient fields",
+        "dark contour edges",
+        "fine grain"
+      ]
+    },
+    "signal": {
+      "source": "02",
+      "tags": [
+        "retro scientific",
+        "bold",
+        "playful"
+      ]
+    }
+  }
+]

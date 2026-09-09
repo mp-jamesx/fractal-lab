@@ -1,0 +1,5 @@
+/* Both collection pages share surface-only hover feedback. */
+.collection-link{background:var(--bg-canvas);transition:background var(--duration-fast) var(--ease-out)}
+.collection-link:hover{background:var(--bg-surface-1)}
+.collection-link:focus-visible{outline:2px solid var(--border-focus);outline-offset:-4px}
+@media(prefers-reduced-motion:reduce){.collection-link{transition:none}}

@@ -1,0 +1,408 @@
+[
+  {
+    "id": 1,
+    "seed": 52421,
+    "post": {
+      "title": "SOC 2, Axon, and Building for Pharma",
+      "url": "https://mirrorphysics.substack.com/p/soc-2-axon-and-building-for-pharma",
+      "summary": "Protecting pharmaceutical research through access controls, operational rigor, and secure infrastructure. Concept: protected space, a permeable boundary, or ordered nested systems."
+    },
+    "siteReference": "https://www.mirrorphysics.com/blog",
+    "moodboard": "Futuristic and lines",
+    "palette": {
+      "source": "03",
+      "title": "Organic Contour Rings",
+      "tags": [
+        "charcoal",
+        "light gray"
+      ]
+    },
+    "structure": {
+      "source": "06",
+      "title": "Black Chrome Flow Poster",
+      "tags": [
+        "flowing reflective ribbons",
+        "layered collage",
+        "oversized angular typography",
+        "honeycomb texture",
+        "micro typography",
+        "high contrast highlights"
+      ]
+    },
+    "signal": {
+      "source": "02",
+      "title": "Teal Targeting Interface",
+      "tags": [
+        "futuristic",
+        "precise"
+      ]
+    }
+  },
+  {
+    "id": 2,
+    "seed": 22576,
+    "post": {
+      "title": "A new AI architecture advancing the frontier of chemical simulation",
+      "url": "https://mirrorphysics.substack.com/p/a-new-ai-architecture-advancing-the",
+      "summary": "EquiformerV3 uses equivariant graph models for chemical physics. Concept: a form whose relationships survive rotation, force fields, or coordinated spatial neighborhoods."
+    },
+    "siteReference": "https://www.mirrorphysics.com/blog",
+    "moodboard": "Futuristic and lines",
+    "palette": {
+      "source": "07",
+      "title": "Geometric Event Tickets",
+      "tags": [
+        "black",
+        "off-white",
+        "charcoal"
+      ]
+    },
+    "structure": {
+      "source": "05",
+      "title": "Isometric System Stack",
+      "tags": [
+        "isometric projection",
+        "exploded layers",
+        "connected nodes",
+        "geometric primitives",
+        "fine outline drawing",
+        "pixel grid"
+      ]
+    },
+    "signal": {
+      "source": "04",
+      "title": "Orbital Contour Atlas",
+      "tags": [
+        "scientific",
+        "computational",
+        "systematic"
+      ]
+    }
+  },
+  {
+    "id": 3,
+    "seed": 48032,
+    "post": {
+      "title": "Updating our ADMET Toolkits",
+      "url": "https://mirrorphysics.substack.com/p/updating-our-admet-toolkits",
+      "summary": "Improving molecular prediction through curated datasets, principled splits, baselines, and evaluation. Concept: separating overlapping signals into trustworthy structure; avoid performance claims."
+    },
+    "siteReference": "https://www.mirrorphysics.com/blog",
+    "moodboard": "Futuristic and lines",
+    "palette": {
+      "source": "03",
+      "title": "Organic Contour Rings",
+      "tags": [
+        "charcoal",
+        "light gray"
+      ]
+    },
+    "structure": {
+      "source": "05",
+      "title": "Isometric System Stack",
+      "tags": [
+        "isometric projection",
+        "exploded layers",
+        "connected nodes",
+        "geometric primitives",
+        "fine outline drawing",
+        "pixel grid"
+      ]
+    },
+    "signal": {
+      "source": "07",
+      "title": "Geometric Event Tickets",
+      "tags": [
+        "systematic",
+        "rhythmic",
+        "bold"
+      ]
+    }
+  },
+  {
+    "id": 4,
+    "seed": 84944,
+    "post": {
+      "title": "Experimental grounding with onepot.ai",
+      "url": "https://mirrorphysics.substack.com/p/experimental-grounding-with-onepotai",
+      "summary": "Connecting computational molecular design to automated synthesis and returning experimental results. Concept: a feedback loop between a proposal and a physical test."
+    },
+    "siteReference": "https://www.mirrorphysics.com/blog",
+    "moodboard": "Futuristic and lines",
+    "palette": {
+      "source": "02",
+      "title": "Teal Targeting Interface",
+      "tags": [
+        "black",
+        "white",
+        "teal",
+        "green"
+      ]
+    },
+    "structure": {
+      "source": "05",
+      "title": "Isometric System Stack",
+      "tags": [
+        "isometric projection",
+        "exploded layers",
+        "connected nodes",
+        "geometric primitives",
+        "fine outline drawing",
+        "pixel grid"
+      ]
+    },
+    "signal": {
+      "source": "03",
+      "title": "Organic Contour Rings",
+      "tags": [
+        "restrained",
+        "organic",
+        "meditative"
+      ]
+    }
+  },
+  {
+    "id": 5,
+    "seed": 41781,
+    "post": {
+      "title": "Benchmarking Scientific Intelligence: Bioinformatics",
+      "url": "https://mirrorphysics.substack.com/p/benchmarking-scientific-intelliogence",
+      "summary": "Measuring agents on biological analysis while questioning what saturated benchmarks miss. Concept: a measuring frame that opens into unexplored territory. No numeric performance charts."
+    },
+    "siteReference": "https://www.mirrorphysics.com/blog",
+    "moodboard": "Futuristic and lines",
+    "palette": {
+      "source": "01",
+      "title": "Orange Interface Symbols",
+      "tags": [
+        "black",
+        "white",
+        "orange"
+      ]
+    },
+    "structure": {
+      "source": "04",
+      "title": "Orbital Contour Atlas",
+      "tags": [
+        "specimen grid",
+        "layered contour lines",
+        "curved ribbon forms",
+        "dotted axes",
+        "colored focal points",
+        "micro typography"
+      ]
+    },
+    "signal": {
+      "source": "07",
+      "title": "Geometric Event Tickets",
+      "tags": [
+        "systematic",
+        "rhythmic",
+        "bold"
+      ]
+    }
+  },
+  {
+    "id": 6,
+    "seed": 92773,
+    "post": {
+      "title": "Supercharging Rowan\u2019s tools with AI agents",
+      "url": "https://mirrorphysics.substack.com/p/supercharging-rowans-tools-with-ai",
+      "summary": "Axon orchestrates computational chemistry tools including conformer search and redox calculations. Metronidazole is one example in the post. Concept: many pathways coordinated around a spatial object."
+    },
+    "siteReference": "https://www.mirrorphysics.com/blog",
+    "moodboard": "Futuristic and lines",
+    "palette": {
+      "source": "03",
+      "title": "Organic Contour Rings",
+      "tags": [
+        "charcoal",
+        "light gray"
+      ]
+    },
+    "structure": {
+      "source": "05",
+      "title": "Isometric System Stack",
+      "tags": [
+        "isometric projection",
+        "exploded layers",
+        "connected nodes",
+        "geometric primitives",
+        "fine outline drawing",
+        "pixel grid"
+      ]
+    },
+    "signal": {
+      "source": "04",
+      "title": "Orbital Contour Atlas",
+      "tags": [
+        "scientific",
+        "computational",
+        "systematic"
+      ]
+    }
+  },
+  {
+    "id": 7,
+    "seed": 96721,
+    "post": {
+      "title": "Scalable Molecular Dynamics with Agentic AI",
+      "url": "https://mirrorphysics.substack.com/p/scalable-molecular-dynamics",
+      "summary": "Orchestrating molecular dynamics across engines and GPUs. Concept: coordinated parallel trajectories, scale and time. Do not claim artistic motion is an MD simulation; abstract paths are fine."
+    },
+    "siteReference": "https://www.mirrorphysics.com/blog",
+    "moodboard": "Futuristic and lines",
+    "palette": {
+      "source": "02",
+      "title": "Teal Targeting Interface",
+      "tags": [
+        "black",
+        "white",
+        "teal",
+        "green"
+      ]
+    },
+    "structure": {
+      "source": "03",
+      "title": "Organic Contour Rings",
+      "tags": [
+        "layered contour lines",
+        "overlapping irregular loops",
+        "central void",
+        "fine linework",
+        "centered composition"
+      ]
+    },
+    "signal": {
+      "source": "01",
+      "title": "Orange Interface Symbols",
+      "tags": [
+        "futuristic",
+        "technical",
+        "energetic"
+      ]
+    }
+  },
+  {
+    "id": 8,
+    "seed": 3524,
+    "post": {
+      "title": "AI Agents for Molecular Property Prediction",
+      "url": "https://mirrorphysics.substack.com/p/molecular-property-prediction-with",
+      "summary": "Natural-language workflows train models to assess molecular properties. Concept: one candidate seen through multiple analytical lenses. Article notes benchmark limitations; no invented scores."
+    },
+    "siteReference": "https://www.mirrorphysics.com/blog",
+    "moodboard": "Futuristic and lines",
+    "palette": {
+      "source": "07",
+      "title": "Geometric Event Tickets",
+      "tags": [
+        "black",
+        "off-white",
+        "charcoal"
+      ]
+    },
+    "structure": {
+      "source": "05",
+      "title": "Isometric System Stack",
+      "tags": [
+        "isometric projection",
+        "exploded layers",
+        "connected nodes",
+        "geometric primitives",
+        "fine outline drawing",
+        "pixel grid"
+      ]
+    },
+    "signal": {
+      "source": "04",
+      "title": "Orbital Contour Atlas",
+      "tags": [
+        "scientific",
+        "computational",
+        "systematic"
+      ]
+    }
+  },
+  {
+    "id": 9,
+    "seed": 80004,
+    "post": {
+      "title": "Structure-Based Virtual Screening with AI Agents",
+      "url": "https://mirrorphysics.substack.com/p/virtual-screening-with-axon",
+      "summary": "Agents organize a two-stage docking workflow to narrow many candidates into a smaller promising set. Concept: selection, apertures, or a search space. Avoid claiming an actual binding pose."
+    },
+    "siteReference": "https://www.mirrorphysics.com/blog",
+    "moodboard": "Futuristic and lines",
+    "palette": {
+      "source": "03",
+      "title": "Organic Contour Rings",
+      "tags": [
+        "charcoal",
+        "light gray"
+      ]
+    },
+    "structure": {
+      "source": "01",
+      "title": "Orange Interface Symbols",
+      "tags": [
+        "modular collage",
+        "fine line diagrams",
+        "pixelated symbols",
+        "asymmetric composition",
+        "micro typography"
+      ]
+    },
+    "signal": {
+      "source": "06",
+      "title": "Black Chrome Flow Poster",
+      "tags": [
+        "futuristic",
+        "industrial",
+        "dramatic"
+      ]
+    }
+  },
+  {
+    "id": 10,
+    "seed": 2674,
+    "post": {
+      "title": "From Latte to Lab: A Toy Model of Enzyme Inhibitor Screening",
+      "url": "https://mirrorphysics.substack.com/p/from-latte-to-lab-a-toy-model-of",
+      "summary": "Exploratory caffeine/lactase testing used a plate and optical readouts. Concept: everyday chemistry entering an ordered assay, or a slowly changing field. Caffeine is available as a generated 3D conformer; do not imply validated inhibition."
+    },
+    "siteReference": "https://www.mirrorphysics.com/blog",
+    "moodboard": "Futuristic and lines",
+    "palette": {
+      "source": "02",
+      "title": "Teal Targeting Interface",
+      "tags": [
+        "black",
+        "white",
+        "teal",
+        "green"
+      ]
+    },
+    "structure": {
+      "source": "04",
+      "title": "Orbital Contour Atlas",
+      "tags": [
+        "specimen grid",
+        "layered contour lines",
+        "curved ribbon forms",
+        "dotted axes",
+        "colored focal points",
+        "micro typography"
+      ]
+    },
+    "signal": {
+      "source": "06",
+      "title": "Black Chrome Flow Poster",
+      "tags": [
+        "futuristic",
+        "industrial",
+        "dramatic"
+      ]
+    }
+  }
+]

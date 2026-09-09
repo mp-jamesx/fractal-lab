@@ -1,0 +1,20 @@
+[
+  {
+    "id": "001",
+    "name": "3D M logo",
+    "path": "/experiments/001-3d-m-logo",
+    "preview": "mirror-logo"
+  },
+  {
+    "id": "002",
+    "name": "Blog thumbnails",
+    "path": "/experiments/002-blog-thumbnails",
+    "preview": "blog-thumbnail"
+  },
+  {
+    "id": "003",
+    "name": "Editorial thumbnails",
+    "path": "/experiments/003-editorial-thumbnails",
+    "preview": "editorial-thumbnail"
+  }
+]

@@ -1,7 +1,7 @@
 import { readTags, writeJSON, hydrateTags } from './tags.js';
 import { realpathSync, mkdirSync, writeFileSync } from 'node:fs';
-import { readFile, writeFile, rename, mkdir, realpath, unlink, rmdir } from 'node:fs/promises';
-import { resolve, sep } from 'node:path';
+import { readFile, writeFile, rename, mkdir, realpath, unlink, rmdir, copyFile, stat } from 'node:fs/promises';
+import { resolve, sep, dirname, basename, extname } from 'node:path';
 import { randomUUID } from 'node:crypto';
 const MAX_IMAGE = 50 * 1024 * 1024;
 const fail = (message, status = 400) => Object.assign(new Error(message), {status});
@@ -67,6 +67,81 @@ export function createLibraryAPI(root) {
           try {await writeJSON(resolve(images,id,'tags.json'),{});await save(data);}catch(error){await unlink(resolve(images,id,'tags.json')).catch(()=>{});await rmdir(resolve(images,id));throw error;}return {board,catalog:await hydrateTags(root,data)};
         });
         return respond(201,result);
+      }
+      const transfer=path.match(/^\/api\/boards\/([a-z0-9-]+)\/images\/transfer$/);
+      if(transfer) {
+        let input;try{input=JSON.parse((await body(req,256*1024)).toString());}catch(e){if(e.status)throw e;throw fail('Invalid transfer details.');}
+        if(!['copy','cut'].includes(input?.mode) || !Array.isArray(input.items) || !input.items.length || input.items.length>500)throw fail('Select 1–500 images to transfer.');
+        const result=await serial(async()=>{
+          const original=JSON.parse(await readFile(catalogPath,'utf8'));const data=structuredClone(original);
+          const destination=data.boards.find(b=>b.id===transfer[1]);if(!destination)throw fail('Destination moodboard not found.',404);
+          const images=await imageRoot();const directory=resolve(images,destination.id);
+          await mkdir(directory,{recursive:true});if(await realpath(directory)!==directory || !directory.startsWith(images+sep))throw fail('Invalid destination folder.');
+          const tags=new Map(), previousTags=new Map(), seen=new Set(), plans=[];
+          async function tagMap(folder){if(!tags.has(folder)){const map=await readTags(folder);previousTags.set(folder,map);tags.set(folder,{...map});}return tags.get(folder);}
+          await tagMap(directory);
+          for(const item of input.items) {
+            if(typeof item?.path!=='string' || !/^images\/[a-z0-9-]+\/[^/\\]+\.(png|jpe?g|gif|webp|avif|svg)$/i.test(item.path) || seen.has(item.path))throw fail('Invalid or duplicate image path.');
+            seen.add(item.path);
+            const ref=data.references.find(r=>r.path===item.path);
+            if(!ref || !Array.isArray(item.sourceBoards) || !item.sourceBoards.length || item.sourceBoards.some(id=>!ref.boards.includes(id)))throw fail('A selected image is no longer in its source moodboard. Refresh and select it again.',409);
+            const source=resolve(root,item.path);const folder=dirname(source);
+            if(!source.startsWith(images+sep) || await realpath(source)!==source || !(await stat(source)).isFile())throw fail('Invalid source image.');
+            const sourceTags=await tagMap(folder);
+            plans.push({item,ref,source,folder,imageTags:sourceTags[basename(source)]||[]});
+          }
+          const operations=[],added=[],moved=[];
+          try {
+            for(const plan of plans) {
+              const {item,ref,source,folder,imageTags}=plan;
+              const sameFolder=input.mode==='cut' && folder===directory;
+              const filename=sameFolder?basename(source):`${Date.now()}-${randomUUID()}${extname(source)}`;
+              const target=resolve(directory,filename);const newPath=`images/${destination.id}/${filename}`;
+              if(input.mode==='copy') {
+                await copyFile(source,target,1);operations.push({source,target,mode:'copy'});
+                const copy={...ref,path:newPath,boards:[destination.id]};data.references.push(copy);added.push(newPath);
+              } else {
+                if(!sameFolder){await rename(source,target);operations.push({source,target,mode:'cut'});delete tags.get(folder)[basename(source)];}
+                ref.path=newPath;ref.boards=[...new Set([...ref.boards.filter(id=>!item.sourceBoards.includes(id)),destination.id])];moved.push({from:item.path,to:newPath});
+              }
+              tags.get(directory)[filename]=imageTags;
+            }
+            for(const [folder,map] of tags)await writeJSON(resolve(folder,'tags.json'),map);
+            const catalog=await hydrateTags(root,data);await save(data);
+            return {catalog,added,moved,count:plans.length};
+          }catch(error){
+            for(const op of operations.reverse()){if(op.mode==='cut')await rename(op.target,op.source);else await unlink(op.target);}
+            for(const [folder,map] of previousTags)await writeJSON(resolve(folder,'tags.json'),map);
+            throw error;
+          }
+        });
+        return respond(200,result);
+      }
+      const deletion=path.match(/^\/api\/boards\/([a-z0-9-]+)\/images\/delete$/);
+      if(deletion) {
+        let input;try {input=JSON.parse((await body(req,4096)).toString());}catch(e){if(e.status)throw e;throw fail('Invalid image details.');}
+        const imagePath=input?.path;
+        if(typeof imagePath!=='string' || !/^images\/[a-z0-9-]+\/[^/\\]+\.(png|jpe?g|gif|webp|avif|svg)$/i.test(imagePath)) throw fail('Invalid image path.');
+        const result=await serial(async()=>{
+          const data=JSON.parse(await readFile(catalogPath,'utf8'));
+          if(!data.boards.some(b=>b.id===deletion[1]))throw fail('Moodboard not found.',404);
+          if(!data.references.some(r=>r.path===imagePath && r.boards.includes(deletion[1])))throw fail('Image not found in this moodboard.',404);
+          const images=await imageRoot();const target=resolve(root,imagePath);const directory=dirname(target);
+          if(!target.startsWith(images+sep) || await realpath(directory)!==directory)throw fail('Invalid image folder.');
+          try {if(await realpath(target)!==target)throw fail('Image must not be a symbolic link.');}
+          catch(e){if(e.code==='ENOENT')throw fail('Image file not found.',404);throw e;}
+          const previousTags=await readTags(directory);const nextTags={...previousTags};delete nextTags[basename(target)];
+          const next={...data,references:data.references.filter(r=>r.path!==imagePath)};
+          // Validate the response before changing anything. Metadata is rolled back if unlink fails.
+          const hydrated=await hydrateTags(root,next);
+          try {
+            await writeJSON(resolve(directory,'tags.json'),nextTags);
+            await save(next);
+            await unlink(target);
+          }catch(error){await writeJSON(resolve(directory,'tags.json'),previousTags);await save(data);throw error;}
+          return {deleted:imagePath,catalog:hydrated};
+        });
+        return respond(200,result);
       }
       const match=path.match(/^\/api\/boards\/([a-z0-9-]+)\/images$/);
       if(!match) throw fail('Not found.',404);

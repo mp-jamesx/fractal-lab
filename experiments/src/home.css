@@ -1,0 +1,17 @@
+@import './theme.css';
+@import '../../shared/collection.css';
+* { box-sizing: border-box; }
+body { margin: 0; }
+#app { max-width: none; padding: var(--space-7); margin: auto; }
+h1 { font-size: 1.75rem; letter-spacing: -.02em; font-weight: 600; line-height: 1.2; margin: 0 0 var(--space-7); }
+.experiment-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: var(--space-6); }
+.experiment-card { display: block; text-decoration: none; color: inherit; border: 1px solid var(--border-subtle); overflow: hidden; border-radius: var(--radius-lg); }
+.experiment-preview { aspect-ratio: 1.25; overflow: hidden; background: #eeefed; }
+canvas { display: block; }
+.blog-preview { display: flex; align-items: center; background: #11181b; }
+.blog-preview canvas { width: 100% !important; height: auto !important; }
+.experiment-caption { display: flex; align-items: center; justify-content: space-between; padding: var(--space-4); gap: 16px; border-top: 1px solid var(--border-subtle); }
+h2 { font-size: .875rem; font-weight: 500; margin: 0; }
+.experiment-caption span { color: var(--fg-secondary); font-size: 12px; font-variant-numeric: tabular-nums; }
+@media (max-width:900px) { .experiment-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media (max-width:560px) { #app { padding: var(--space-4); } .experiment-grid { grid-template-columns: 1fr; } }

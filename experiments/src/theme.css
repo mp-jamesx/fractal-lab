@@ -1,0 +1,14 @@
+@import '@mirror-physics/fractal-ui/tokens.css';
+
+/* Shared with Fractal Lab's moodboard UI; artwork palettes belong to the sketches. */
+:root{color-scheme:light dark;font-family:var(--font-sans);font-synthesis:none;color:var(--fg-primary);background:var(--bg-canvas);--border-focus:var(--fg-primary)}
+body{font-family:var(--font-sans);font-size:.875rem;line-height:1.4;color:var(--fg-primary);background:var(--bg-canvas)}
+button,input,select{font:inherit}
+strong,b{font-weight:600}
+dialog{color:var(--fg-primary)}
+
+/* Same hierarchy and rhythm as Moodboards, on every experiment route. */
+.lab-breadcrumb{display:flex;align-items:center;flex-wrap:wrap;gap:var(--space-3);margin-bottom:var(--space-6);font-size:.875rem;line-height:1.4;font-weight:400;color:var(--fg-secondary)}
+.lab-breadcrumb a{color:inherit;text-decoration:none;font-weight:400}
+.lab-breadcrumb a:focus-visible{outline:2px solid var(--border-focus);outline-offset:2px}
+@media(max-width:640px){.lab-breadcrumb a{padding-block:var(--space-3)}}

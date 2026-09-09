@@ -77,3 +77,91 @@ test('Fresh clones initialize an empty library without overwriting existing loca
   createLibraryAPI(root);
   assert.equal(await readFile(join(root,'catalog.json'),'utf8'),content);
 });
+
+test('Deleting an image removes bytes, shared references, and only its tag entry',async t=>{
+  const f=await fixture(t);await f.board('One');await f.board('Two');
+  const first=await f.post('/api/boards/one/images',png);const second=await f.post('/api/boards/one/images',png);
+  const catalogPath=join(f.root,'catalog.json'),tagsPath=join(f.root,'images/one/tags.json');
+  const data=JSON.parse(await readFile(catalogPath,'utf8'));data.references[0].boards.push('two');
+  await writeFile(catalogPath,JSON.stringify(data));
+  await writeFile(tagsPath,JSON.stringify({[first.reference.path.split('/').at(-1)]:['palette: blue'],[second.reference.path.split('/').at(-1)]:['keep']}));
+  const result=await f.post('/api/boards/two/images/delete',JSON.stringify({path:first.reference.path}));
+  assert.equal(result.status,200);assert.equal(result.catalog.references.length,1);
+  assert.deepEqual(result.catalog.references[0].tags,['keep']);
+  await assert.rejects(readFile(join(f.root,first.reference.path)),{code:'ENOENT'});
+  assert.deepEqual(await readFile(join(f.root,second.reference.path)),png);
+  assert.deepEqual(JSON.parse(await readFile(tagsPath,'utf8')),{[second.reference.path.split('/').at(-1)]:['keep']});
+  assert.equal((await f.post('/api/boards/two/images/delete',JSON.stringify({path:first.reference.path}))).status,404);
+});
+
+test('Deletion rejects foreign origins, paths outside the board, traversal, and symlink images',async t=>{
+  const f=await fixture(t);await f.board('One');await f.board('Two');
+  const upload=await f.post('/api/boards/one/images',png);const path=upload.reference.path;
+  assert.equal((await f.post('/api/boards/one/images/delete',JSON.stringify({path}),{Origin:'https://evil.example'})).status,403);
+  assert.equal((await f.post('/api/boards/two/images/delete',JSON.stringify({path}))).status,404);
+  for(const path of ['../catalog.json','images/one/../../outside.png','images/one/tags.json','/tmp/outside.png'])assert.equal((await f.post('/api/boards/one/images/delete',JSON.stringify({path}))).status,400);
+  const external=join(f.root,'external.png');await writeFile(external,png);await rm(join(f.root,path));await symlink(external,join(f.root,path));
+  assert.equal((await f.post('/api/boards/one/images/delete',JSON.stringify({path}))).status,400);
+  assert.deepEqual(await readFile(external),png);
+  assert.equal(JSON.parse(await readFile(join(f.root,'catalog.json'),'utf8')).references.length,1);
+});
+
+test('Failed file deletion restores metadata; malformed tags leave original bytes untouched',async t=>{
+  const {mkdir}=await import('node:fs/promises');
+  const f=await fixture(t);await f.board('One');const upload=await f.post('/api/boards/one/images',png);const path=upload.reference.path;
+  const tagsPath=join(f.root,'images/one/tags.json');
+  await writeFile(tagsPath,'broken');
+  assert.equal((await f.post('/api/boards/one/images/delete',JSON.stringify({path}))).status,500);
+  assert.deepEqual(await readFile(join(f.root,path)),png);
+  const tags={[path.split('/').at(-1)]:['keep']};await writeFile(tagsPath,JSON.stringify(tags));
+  await rm(join(f.root,path));await mkdir(join(f.root,path));
+  assert.equal((await f.post('/api/boards/one/images/delete',JSON.stringify({path}))).status,500);
+  assert.equal(JSON.parse(await readFile(join(f.root,'catalog.json'),'utf8')).references[0].path,path);
+  assert.deepEqual(JSON.parse(await readFile(tagsPath,'utf8')),tags);
+});
+
+test('Concurrent deletion and upload preserve surviving records and files',async t=>{
+  const f=await fixture(t);await f.board('One');const uploads=await Promise.all(Array.from({length:3},()=>f.post('/api/boards/one/images',png)));
+  const results=await Promise.all([...uploads.map(u=>f.post('/api/boards/one/images/delete',JSON.stringify({path:u.reference.path}))),f.post('/api/boards/one/images',png)]);
+  assert.deepEqual(results.map(r=>r.status),[200,200,200,201]);
+  const data=JSON.parse(await readFile(join(f.root,'catalog.json'),'utf8'));assert.equal(data.references.length,1);
+  assert.deepEqual(await readFile(join(f.root,data.references[0].path)),png);
+  for(const u of uploads)await assert.rejects(readFile(join(f.root,u.reference.path)),{code:'ENOENT'});
+});
+
+test('Copies selections from several boards into independent files with metadata and tags',async t=>{
+  const f=await fixture(t);for(const name of ['A','B','C'])await f.board(name);
+  const a=await f.post('/api/boards/a/images',png,{'X-File-Name':'first.png'}),b=await f.post('/api/boards/b/images',png);
+  await writeFile(join(f.root,'images/a/tags.json'),JSON.stringify({[a.reference.path.split('/').at(-1)]:['palette: blue']}));
+  const result=await f.post('/api/boards/c/images/transfer',JSON.stringify({mode:'copy',items:[{path:a.reference.path,sourceBoards:['a']},{path:b.reference.path,sourceBoards:['b']}]}));
+  assert.equal(result.status,200);assert.equal(result.count,2);assert.equal(result.catalog.references.length,4);
+  assert.equal(result.added.length,2);assert.equal(result.moved.length,0);
+  for(const path of [a.reference.path,b.reference.path,...result.added])assert.deepEqual(await readFile(join(f.root,path)),png);
+  assert.deepEqual(result.catalog.references.find(r=>r.path===result.added[0]).tags,['palette: blue']);
+  assert.deepEqual(result.catalog.references.find(r=>r.path===result.added[0]).boards,['c']);
+  await f.post('/api/boards/c/images/delete',JSON.stringify({path:result.added[0]}));
+  assert.deepEqual(await readFile(join(f.root,a.reference.path)),png);
+});
+
+test('Cut moves originals and tags while preserving memberships not selected as sources',async t=>{
+  const f=await fixture(t);for(const name of ['A','B','C','D'])await f.board(name);
+  const a=await f.post('/api/boards/a/images',png),b=await f.post('/api/boards/b/images',png);
+  const data=JSON.parse(await readFile(join(f.root,'catalog.json'),'utf8'));data.references[0].boards.push('d');await writeFile(join(f.root,'catalog.json'),JSON.stringify(data));
+  const result=await f.post('/api/boards/c/images/transfer',JSON.stringify({mode:'cut',items:[{path:a.reference.path,sourceBoards:['a']},{path:b.reference.path,sourceBoards:['b']}]}));
+  assert.equal(result.status,200);assert.equal(result.catalog.references.length,2);assert.equal(result.moved.length,2);
+  assert.deepEqual(result.catalog.references[0].boards,['d','c']);assert.deepEqual(result.catalog.references[1].boards,['c']);
+  for(const move of result.moved){await assert.rejects(readFile(join(f.root,move.from)),{code:'ENOENT'});assert.deepEqual(await readFile(join(f.root,move.to)),png);}
+  assert.deepEqual(JSON.parse(await readFile(join(f.root,'images/a/tags.json'),'utf8')),{});
+  const same=await f.post('/api/boards/c/images/transfer',JSON.stringify({mode:'cut',items:[{path:result.moved[0].to,sourceBoards:['c']}]}));
+  assert.equal(same.status,200);assert.equal(same.moved[0].from,same.moved[0].to);assert.equal(same.catalog.references.length,2);
+});
+
+test('Transfers validate the entire selection before moving any file',async t=>{
+  const f=await fixture(t);await f.board('A');await f.board('B');const a=await f.post('/api/boards/a/images',png);
+  const item={path:a.reference.path,sourceBoards:['a']};
+  for(const items of [[item,{path:'images/a/missing.png',sourceBoards:['a']}],[item,item],[{...item,sourceBoards:['b']}]]){
+    const result=await f.post('/api/boards/b/images/transfer',JSON.stringify({mode:'cut',items}));assert(result.status>=400);
+    assert.deepEqual(await readFile(join(f.root,a.reference.path)),png);assert.equal(JSON.parse(await readFile(join(f.root,'catalog.json'),'utf8')).references[0].path,a.reference.path);
+  }
+  const result=await f.post('/api/boards/b/images/transfer',JSON.stringify({mode:'copy',items:[item]}),{Origin:'https://evil.example'});assert.equal(result.status,403);
+});

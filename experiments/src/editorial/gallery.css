@@ -1,0 +1,4 @@
+.caption { align-items: flex-start; gap: 24px; line-height: 1.4; font-size: 14px; }
+.caption .number { padding-top: 4px; }
+.art-title { margin: 0 0 10px; font-size: 12px; color: var(--fg-secondary); }
+.article-link { display: block; font-size: 14px; line-height: 1.5; text-decoration: underline; text-underline-offset: 3px; }

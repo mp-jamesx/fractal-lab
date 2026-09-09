@@ -12,8 +12,8 @@ footer{border-top:1px solid var(--border-subtle);padding:var(--space-4) var(--sp
 .board-caption{border-top:1px solid var(--border-on-surface-1, var(--border-subtle))}
 .new-board{display:flex;align-items:center;justify-content:center;min-height:320px;width:100%;height:100%;padding:0;border:0;background:var(--bg-canvas);color:var(--fg-primary);text-align:left;cursor:pointer;transition:background var(--duration-fast) var(--ease-out)}
 .new-board-card,.new-board,.new-board:hover{background:#fff}.new-board:focus-visible{outline:2px solid var(--border-focus);outline-offset:-4px}
-.plus{font-size:4rem;line-height:1;font-weight:400;color:#565659}
-.import-hint{margin:0 0 var(--space-6)}.save-message{margin:0 0 var(--space-4)}
+.plus{font-size:4rem;line-height:1;font-weight:400;color:var(--fg-secondary)}
+.import-hint{margin:0 0 var(--space-6)}
 .drop-overlay{position:fixed;inset:var(--space-4);z-index:2;display:flex;align-items:center;justify-content:center;border:1px solid var(--border-focus);border-radius:var(--radius-lg);background:var(--bg-surface-1);pointer-events:none;font-size:1.25rem;font-weight:500;padding:var(--space-6)}
 .name-field{display:flex;flex-direction:column;gap:var(--space-2)}.create-actions{display:flex;justify-content:flex-end;gap:var(--space-2);margin-top:var(--space-6)}
 .create-board .fractal-modal-close:focus-visible{outline:2px solid var(--border-focus);outline-offset:2px}
@@ -50,3 +50,55 @@ main>.page-heading,main>.breadcrumb,main>.import-hint,main>p,main>div[aria-live]
 .breadcrumb .fractal-link:hover,
 .breadcrumb .fractal-link:active,
 .breadcrumb .fractal-link:visited{font-weight:400;text-decoration:none}
+/* Image actions share Fractal's menu surface and icon language. */
+.reference-card{position:relative}
+.image-trash{position:absolute;top:10px;right:10px;z-index:2;display:grid;place-items:center;width:34px;height:34px;padding:0;border:1px solid var(--border-subtle);border-radius:var(--radius-md,6px);background:var(--bg-canvas);color:var(--fg-secondary);opacity:0;pointer-events:none;cursor:pointer;box-shadow:0 2px 8px #0000000d;transition:opacity .12s}
+.reference-card:hover .image-trash,.reference-card:focus-within .image-trash{opacity:1;pointer-events:auto}
+.image-trash:hover{color:var(--fg-primary);background:var(--bg-surface-1)}
+.image-trash:focus-visible{outline:2px solid var(--border-focus);outline-offset:2px}
+.image-trash:disabled{cursor:wait}
+.image-context-menu.fractal-dropdown-panel{position:fixed;z-index:1000;min-width:160px;padding:4px;transform:none;margin:0;right:auto;bottom:auto;background:var(--bg-canvas);border:1px solid var(--border-subtle);border-radius:var(--radius-md,6px);box-shadow:0 8px 24px #0000001a}
+.image-delete-menu-item{display:flex;align-items:center;gap:10px;width:100%;padding:9px 10px;background:none;border:0;border-radius:4px;text-align:left;color:var(--fg-primary);font:inherit;cursor:pointer}
+.image-delete-menu-item:hover,.image-delete-menu-item:focus{background:var(--bg-surface-1);outline:none}
+@media(hover:none){.image-trash{opacity:1;pointer-events:auto}}
+.reference-card.is-selected{outline:2px solid var(--fg-primary);outline-offset:-2px;z-index:1}
+.reference-card.is-selected::after{content:'✓';position:absolute;left:10px;top:10px;width:22px;height:22px;display:grid;place-items:center;border-radius:50%;background:var(--fg-primary);color:var(--bg-canvas);font-size:13px;pointer-events:none}
+.reference-open{user-select:none}.reference-open img{-webkit-user-drag:none}
+.has-batch-selection{padding-bottom:130px}
+.batch-toolbar{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:50;display:flex;align-items:center;gap:16px;max-width:calc(100vw - 32px);padding:12px 14px;border:1px solid var(--border-subtle);border-radius:12px;background:var(--bg-canvas);color:var(--fg-primary);box-shadow:0 8px 32px #00000024;animation:batch-enter .2s ease-out}
+.batch-previews{display:flex;gap:4px;overflow-x:auto;max-width:200px;min-width:40px;padding:2px;scrollbar-width:thin}
+.batch-previews img{width:36px;height:36px;object-fit:cover;border:1px solid var(--border-subtle);border-radius:4px;flex-shrink:0}
+.batch-count{white-space:nowrap;display:flex;flex-direction:column;gap:3px;font-size:13px}.batch-count span{font-size:10px;color:var(--fg-secondary)}
+.batch-buttons{display:flex;align-items:center;gap:6px}.batch-buttons .fractal-button{gap:6px}.batch-buttons [aria-pressed=true]{outline:1px solid var(--fg-primary)}
+.batch-clear{display:grid;place-items:center;padding:6px;background:none;border:0;color:var(--fg-secondary);cursor:pointer}
+@keyframes batch-enter{from{opacity:0;transform:translate(-50%,24px)}to{opacity:1;transform:translate(-50%,0)}}
+@media(max-width:700px){.batch-toolbar{flex-wrap:wrap;justify-content:center;gap:10px;bottom:12px;width:max-content}.batch-previews{max-width:120px}.batch-buttons{justify-content:center}.has-batch-selection{padding-bottom:170px}}
+@media(prefers-reduced-motion:reduce){.batch-toolbar{animation:none}}
+
+/* Fractal Lab keeps both workspaces within a persistent left navigation. */
+:root{--lab-sidebar-width:208px}
+.lab-sidebar{position:fixed;inset:0 auto 0 0;width:var(--lab-sidebar-width);padding:30px 16px;background:var(--bg-surface-1);border-right:1px solid var(--border-subtle);z-index:3}
+.lab-brand{display:block;padding:0 12px;margin-bottom:36px;text-decoration:none;font-size:20px;font-weight:600;letter-spacing:-.6px;color:var(--fg-primary)}
+.lab-sidebar nav{display:flex;flex-direction:column;gap:6px}
+.lab-sidebar nav a{display:flex;align-items:center;gap:10px;min-height:42px;padding:10px 12px;border-radius:7px;text-decoration:none;color:var(--fg-secondary)}
+.lab-sidebar nav a:hover{background:var(--bg-surface-2)}
+.lab-sidebar nav a[aria-current]{background:var(--bg-canvas);color:var(--fg-primary);box-shadow:0 0 0 1px var(--border-subtle);font-weight:500}
+.lab-sidebar a:focus-visible{outline:2px solid var(--border-focus);outline-offset:3px}
+.lab-content{margin-left:var(--lab-sidebar-width);min-width:0}
+.experiments-section{height:100dvh;min-height:0;padding:0;overflow:hidden}
+.experiments-frame{display:block;width:100%;height:100%;border:0;background:var(--bg-canvas)}
+@media(max-width:700px){:root{--lab-sidebar-width:144px}.lab-sidebar{padding:24px 8px}.lab-brand{padding:0 8px;font-size:18px}.lab-sidebar nav a{gap:8px;padding:10px 8px;font-size:12px}.lab-sidebar nav svg{width:17px;height:17px;flex-shrink:0}}
+
+/* Empty states share the page inset. Artwork and copy form one quiet reading group. */
+.lab-empty-state{display:flex;align-items:center;gap:var(--space-7);padding:var(--space-7);min-height:320px}
+.mirror-study{display:block;width:256px;height:160px;max-width:100%;flex-shrink:0;color:var(--fg-secondary)}
+.lab-empty-copy{max-width:384px;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:var(--space-4)}
+.lab-empty-copy h2,.lab-empty-copy p{margin:0}
+.lab-empty-copy h2{color:var(--fg-primary)}
+.lab-empty-copy p{color:var(--fg-secondary)}
+.new-board{flex-direction:column;gap:var(--space-2);padding:var(--space-6)}
+.new-board-card,.new-board{background:var(--bg-canvas)}
+.new-board:hover{background:var(--bg-surface-1)}
+.collage:has(>.mirror-study){display:flex;align-items:center;justify-content:center}
+@media(max-width:768px){.lab-empty-state{flex-direction:column;align-items:flex-start;gap:var(--space-6)}}
+@media(max-width:640px){.lab-empty-state{padding:var(--space-4)}.lab-empty-state .mirror-study{width:192px;height:120px}}

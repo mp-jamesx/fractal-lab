@@ -1,5 +1,5 @@
 {
-  "name": "moodboard-library",
+  "name": "fractal-lab",
   "version": "1.0.0",
   "private": true,
   "type": "module",
@@ -7,7 +7,10 @@
     "dev": "vite --host 127.0.0.1 --port 8765 --strictPort",
     "build": "vite build",
     "preview": "vite preview --host 127.0.0.1 --port 8765 --strictPort",
-    "test": "node --test server/library.test.js"
+    "test": "node --test server/*.test.js",
+    "build:experiments": "node scripts/build-experiments.js",
+    "predev": "npm run build:experiments",
+    "prebuild": "npm run build:experiments"
   },
   "dependencies": {
     "@mirror-physics/fractal-icons": "^0.4.2",

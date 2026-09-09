@@ -1,0 +1,349 @@
+[
+  {
+    "id": 1,
+    "seed": 71078,
+    "palette": {
+      "source": "04",
+      "title": "Orbital Contour Atlas",
+      "tags": [
+        "black",
+        "white",
+        "coral",
+        "teal",
+        "blue",
+        "lavender"
+      ]
+    },
+    "structure": {
+      "source": "05",
+      "title": "Isometric System Stack",
+      "tags": [
+        "isometric projection",
+        "exploded layers",
+        "connected nodes",
+        "geometric primitives",
+        "fine outline drawing",
+        "pixel grid"
+      ]
+    },
+    "signal": {
+      "source": "02",
+      "title": "Teal Targeting Interface",
+      "tags": [
+        "futuristic",
+        "precise"
+      ]
+    }
+  },
+  {
+    "id": 2,
+    "seed": 67321,
+    "palette": {
+      "source": "06",
+      "title": "Black Chrome Flow Poster",
+      "tags": [
+        "black",
+        "charcoal",
+        "silver",
+        "white"
+      ]
+    },
+    "structure": {
+      "source": "03",
+      "title": "Organic Contour Rings",
+      "tags": [
+        "layered contour lines",
+        "overlapping irregular loops",
+        "central void",
+        "fine linework",
+        "centered composition"
+      ]
+    },
+    "signal": {
+      "source": "04",
+      "title": "Orbital Contour Atlas",
+      "tags": [
+        "scientific",
+        "computational",
+        "systematic"
+      ]
+    }
+  },
+  {
+    "id": 3,
+    "seed": 93695,
+    "palette": {
+      "source": "05",
+      "title": "Isometric System Stack",
+      "tags": [
+        "black",
+        "white",
+        "charcoal",
+        "lime green",
+        "orange"
+      ]
+    },
+    "structure": {
+      "source": "04",
+      "title": "Orbital Contour Atlas",
+      "tags": [
+        "specimen grid",
+        "layered contour lines",
+        "curved ribbon forms",
+        "dotted axes",
+        "colored focal points",
+        "micro typography"
+      ]
+    },
+    "signal": {
+      "source": "07",
+      "title": "Geometric Event Tickets",
+      "tags": [
+        "systematic",
+        "rhythmic",
+        "bold"
+      ]
+    }
+  },
+  {
+    "id": 4,
+    "seed": 14775,
+    "palette": {
+      "source": "04",
+      "title": "Orbital Contour Atlas",
+      "tags": [
+        "black",
+        "white",
+        "coral",
+        "teal",
+        "blue",
+        "lavender"
+      ]
+    },
+    "structure": {
+      "source": "05",
+      "title": "Isometric System Stack",
+      "tags": [
+        "isometric projection",
+        "exploded layers",
+        "connected nodes",
+        "geometric primitives",
+        "fine outline drawing",
+        "pixel grid"
+      ]
+    },
+    "signal": {
+      "source": "01",
+      "title": "Orange Interface Symbols",
+      "tags": [
+        "futuristic",
+        "technical",
+        "energetic"
+      ]
+    }
+  },
+  {
+    "id": 5,
+    "seed": 48865,
+    "palette": {
+      "source": "03",
+      "title": "Organic Contour Rings",
+      "tags": [
+        "charcoal",
+        "light gray"
+      ]
+    },
+    "structure": {
+      "source": "06",
+      "title": "Black Chrome Flow Poster",
+      "tags": [
+        "flowing reflective ribbons",
+        "layered collage",
+        "oversized angular typography",
+        "honeycomb texture",
+        "micro typography",
+        "high contrast highlights"
+      ]
+    },
+    "signal": {
+      "source": "05",
+      "title": "Isometric System Stack",
+      "tags": [
+        "technical",
+        "modular",
+        "precise"
+      ]
+    }
+  },
+  {
+    "id": 6,
+    "seed": 25170,
+    "palette": {
+      "source": "05",
+      "title": "Isometric System Stack",
+      "tags": [
+        "black",
+        "white",
+        "charcoal",
+        "lime green",
+        "orange"
+      ]
+    },
+    "structure": {
+      "source": "04",
+      "title": "Orbital Contour Atlas",
+      "tags": [
+        "specimen grid",
+        "layered contour lines",
+        "curved ribbon forms",
+        "dotted axes",
+        "colored focal points",
+        "micro typography"
+      ]
+    },
+    "signal": {
+      "source": "06",
+      "title": "Black Chrome Flow Poster",
+      "tags": [
+        "futuristic",
+        "industrial",
+        "dramatic"
+      ]
+    }
+  },
+  {
+    "id": 7,
+    "seed": 18787,
+    "palette": {
+      "source": "01",
+      "title": "Orange Interface Symbols",
+      "tags": [
+        "black",
+        "white",
+        "orange"
+      ]
+    },
+    "structure": {
+      "source": "05",
+      "title": "Isometric System Stack",
+      "tags": [
+        "isometric projection",
+        "exploded layers",
+        "connected nodes",
+        "geometric primitives",
+        "fine outline drawing",
+        "pixel grid"
+      ]
+    },
+    "signal": {
+      "source": "02",
+      "title": "Teal Targeting Interface",
+      "tags": [
+        "futuristic",
+        "precise"
+      ]
+    }
+  },
+  {
+    "id": 8,
+    "seed": 98364,
+    "palette": {
+      "source": "02",
+      "title": "Teal Targeting Interface",
+      "tags": [
+        "black",
+        "white",
+        "teal",
+        "green"
+      ]
+    },
+    "structure": {
+      "source": "03",
+      "title": "Organic Contour Rings",
+      "tags": [
+        "layered contour lines",
+        "overlapping irregular loops",
+        "central void",
+        "fine linework",
+        "centered composition"
+      ]
+    },
+    "signal": {
+      "source": "06",
+      "title": "Black Chrome Flow Poster",
+      "tags": [
+        "futuristic",
+        "industrial",
+        "dramatic"
+      ]
+    }
+  },
+  {
+    "id": 9,
+    "seed": 32786,
+    "palette": {
+      "source": "06",
+      "title": "Black Chrome Flow Poster",
+      "tags": [
+        "black",
+        "charcoal",
+        "silver",
+        "white"
+      ]
+    },
+    "structure": {
+      "source": "04",
+      "title": "Orbital Contour Atlas",
+      "tags": [
+        "specimen grid",
+        "layered contour lines",
+        "curved ribbon forms",
+        "dotted axes",
+        "colored focal points",
+        "micro typography"
+      ]
+    },
+    "signal": {
+      "source": "02",
+      "title": "Teal Targeting Interface",
+      "tags": [
+        "futuristic",
+        "precise"
+      ]
+    }
+  },
+  {
+    "id": 10,
+    "seed": 12679,
+    "palette": {
+      "source": "07",
+      "title": "Geometric Event Tickets",
+      "tags": [
+        "black",
+        "off-white",
+        "charcoal"
+      ]
+    },
+    "structure": {
+      "source": "06",
+      "title": "Black Chrome Flow Poster",
+      "tags": [
+        "flowing reflective ribbons",
+        "layered collage",
+        "oversized angular typography",
+        "honeycomb texture",
+        "micro typography",
+        "high contrast highlights"
+      ]
+    },
+    "signal": {
+      "source": "04",
+      "title": "Orbital Contour Atlas",
+      "tags": [
+        "scientific",
+        "computational",
+        "systematic"
+      ]
+    }
+  }
+]

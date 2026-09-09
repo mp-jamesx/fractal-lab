@@ -1,0 +1,305 @@
+[
+  {
+    "id": 1,
+    "seed": 27300,
+    "palette": {
+      "source": "12",
+      "tags": [
+        "black",
+        "white",
+        "muted cyan",
+        "magenta"
+      ]
+    },
+    "structure": {
+      "source": "02",
+      "tags": [
+        "oversized sans serif typography",
+        "connected circular nodes",
+        "stamp border",
+        "vertical composition"
+      ]
+    },
+    "signal": {
+      "source": "09",
+      "tags": [
+        "intricate",
+        "meditative",
+        "sculptural"
+      ]
+    }
+  },
+  {
+    "id": 2,
+    "seed": 86386,
+    "palette": {
+      "source": "08",
+      "tags": [
+        "black",
+        "electric blue",
+        "warm beige",
+        "white"
+      ]
+    },
+    "structure": {
+      "source": "04",
+      "tags": [
+        "two-column diagram",
+        "sequential stages",
+        "clustered spheres",
+        "stippled shading",
+        "labeled cross-sections"
+      ]
+    },
+    "signal": {
+      "source": "07",
+      "tags": [
+        "psychedelic",
+        "energetic",
+        "computational"
+      ]
+    }
+  },
+  {
+    "id": 3,
+    "seed": 95636,
+    "palette": {
+      "source": "04",
+      "tags": [
+        "pale blue",
+        "white",
+        "dark blue"
+      ]
+    },
+    "structure": {
+      "source": "10",
+      "tags": [
+        "scattered biomorphic shapes",
+        "merged blobs",
+        "embedded image textures",
+        "tiny repeated typography",
+        "all-over composition"
+      ]
+    },
+    "signal": {
+      "source": "01",
+      "tags": [
+        "scientific",
+        "computational",
+        "intricate"
+      ]
+    }
+  },
+  {
+    "id": 4,
+    "seed": 46681,
+    "palette": {
+      "source": "10",
+      "tags": [
+        "cobalt blue",
+        "white",
+        "black"
+      ]
+    },
+    "structure": {
+      "source": "01",
+      "tags": [
+        "clustered organic volume",
+        "layered contour lines",
+        "wireframe mesh",
+        "floating spheres"
+      ]
+    },
+    "signal": {
+      "source": "03",
+      "tags": [
+        "experimental",
+        "energetic",
+        "technical"
+      ]
+    }
+  },
+  {
+    "id": 5,
+    "seed": 73959,
+    "palette": {
+      "source": "01",
+      "tags": [
+        "orange",
+        "golden yellow",
+        "charcoal",
+        "black"
+      ]
+    },
+    "structure": {
+      "source": "09",
+      "tags": [
+        "interlocking rings",
+        "porous cellular mesh",
+        "overlapping volumes",
+        "dense irregular holes",
+        "central composition"
+      ]
+    },
+    "signal": {
+      "source": "05",
+      "tags": [
+        "expansive",
+        "observational",
+        "restrained"
+      ]
+    }
+  },
+  {
+    "id": 6,
+    "seed": 17412,
+    "palette": {
+      "source": "05",
+      "tags": [
+        "muted blue",
+        "white",
+        "charcoal"
+      ]
+    },
+    "structure": {
+      "source": "08",
+      "tags": [
+        "diagonal elliptical loop",
+        "spherical forms",
+        "tapered organic connectors",
+        "grainy shading",
+        "asymmetric composition"
+      ]
+    },
+    "signal": {
+      "source": "10",
+      "tags": [
+        "experimental",
+        "fluid",
+        "playful"
+      ]
+    }
+  },
+  {
+    "id": 7,
+    "seed": 27012,
+    "palette": {
+      "source": "02",
+      "tags": [
+        "black and white",
+        "red",
+        "green",
+        "blue"
+      ]
+    },
+    "structure": {
+      "source": "12",
+      "tags": [
+        "flowing point-cloud mesh",
+        "folded ribbon surfaces",
+        "luminous contour lines",
+        "chromatic edge fringing",
+        "isolated central form"
+      ]
+    },
+    "signal": {
+      "source": "11",
+      "tags": [
+        "computational",
+        "interconnected",
+        "dynamic"
+      ]
+    }
+  },
+  {
+    "id": 8,
+    "seed": 25636,
+    "palette": {
+      "source": "06",
+      "tags": [
+        "coral red",
+        "orange",
+        "deep teal",
+        "cream"
+      ]
+    },
+    "structure": {
+      "source": "05",
+      "tags": [
+        "curved planetary horizon",
+        "diagonal framing",
+        "small centered image",
+        "wide negative space",
+        "fine grid lines"
+      ]
+    },
+    "signal": {
+      "source": "12",
+      "tags": [
+        "computational",
+        "experimental",
+        "ethereal"
+      ]
+    }
+  },
+  {
+    "id": 9,
+    "seed": 41743,
+    "palette": {
+      "source": "11",
+      "tags": [
+        "deep violet",
+        "golden yellow",
+        "white"
+      ]
+    },
+    "structure": {
+      "source": "07",
+      "tags": [
+        "undulating volume",
+        "folded surface",
+        "dense dotted texture",
+        "isolated central form"
+      ]
+    },
+    "signal": {
+      "source": "02",
+      "tags": [
+        "retro scientific",
+        "bold",
+        "playful"
+      ]
+    }
+  },
+  {
+    "id": 10,
+    "seed": 51296,
+    "palette": {
+      "source": "07",
+      "tags": [
+        "purple",
+        "magenta",
+        "orange red",
+        "golden yellow",
+        "black"
+      ]
+    },
+    "structure": {
+      "source": "03",
+      "tags": [
+        "looping linework",
+        "asymmetric composition",
+        "geometric logo",
+        "sans serif wordmark"
+      ]
+    },
+    "signal": {
+      "source": "08",
+      "tags": [
+        "futuristic",
+        "sculptural",
+        "minimal"
+      ]
+    }
+  }
+]
