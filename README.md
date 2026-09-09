@@ -1,0 +1,85 @@
+# Shared moodboards
+
+A local moodboard app with image galleries, clipboard and drag-and-drop imports, and agent-readable image tags. Personal boards stay on your computer; the repository contains only the reusable app and documentation.
+
+## Run locally
+
+```sh
+cd moodboards
+npm ci
+npm run dev
+```
+
+Run these commands from your cloned project directory. Use Node.js 22.12+ (or a newer supported LTS release) and npm. Open http://127.0.0.1:8765. Stop with Ctrl+C.
+
+On first startup, the app creates an empty `catalog.json` and `images/inbox/`. Existing libraries are preserved. Click the + tile to create your first board. After installing dependencies, normally just run `npm run dev`.
+
+Click a moodboard to see its images, then click an image to enlarge it. Use Previous/Next or arrow keys to move between images; Escape closes the viewer. Open original shows the full-resolution file.
+
+## Add boards and images
+
+- Click the **+ New moodboard** tile on the home page, enter a name, and click **Create moodboard**. This creates a folder under `images/` and updates `catalog.json`.
+- Open a moodboard and press **Cmd+V** with an image on the clipboard, or drag one or more image files anywhere onto the board. Files save automatically to that board's folder; the gallery updates immediately.
+- Supported formats: PNG, JPEG, WebP, GIF, and AVIF, up to 50 MB per image. Clipboard image data is supported; pasting an image URL alone does not download it.
+- Unique filenames prevent overwriting existing images. Save progress and failures appear above the images.
+- Edit `catalog.json` for descriptions, source URLs, and board membership; edit the image folder’s `tags.json` for tags. Refresh or return focus to the app after manual edits.
+
+## Implementation
+
+- React and Vite, with the npm package `@mirror-physics/fractal-ui` (currently 0.1.2).
+- Fractal's shipped components, tokens, and locally bundled fonts; monochrome UI accents. Images retain their original colors.
+- Image-rich board tiles compose `Card` with a destination link because the published `FolderCard` does not accept a preview slot and labels counts as sessions. The viewer uses `Modal`, augmented with dialog semantics, focus trapping, focus restoration, and background inertness because v0.1.2 does not provide those behaviors.
+- `src/`: gallery source. `vite.config.js`: serves the catalog and original images directly, keeping them out of build output. `server/library.js`: local write API shared by development and preview servers, with serialized catalog updates and atomic file replacement.
+- `images/`, `cache/`, `node_modules/`, and build output are excluded from Git.
+
+## Build
+
+```sh
+npm run build
+npm run preview
+```
+
+Preview includes the same local save API. The optional `python3 serve.py` launcher also starts this preview server. Stop the dev server first. Pass `--port 8766` to the Python server to use another port.
+
+Both servers listen only on your computer. No cloud storage or image uploads are configured. Include images in your normal backup: GitHub will not contain your catalog, tags, or images.
+
+## Validation
+
+`npm test` checks local folder creation, concurrent uploads, byte preservation, duplicate names, and invalid requests in temporary folders.
+
+## Tagging references (for agents)
+
+Each moodboard folder contains `tags.json`, the authoritative map from **image filename** to **an array of tags**:
+
+```json
+{
+  "01-molecular-contours.png": ["molecular", "3d rendering", "palette: orange", "palette: black", "signal: scientific", "structure: contour lines"]
+}
+```
+
+- Read images before tagging. Use concise lowercase phrases describing visible subjects, medium, palette, composition, texture, typography, and useful reference qualities. Avoid claims about creators or provenance unless known.
+- Use the exact filename as the key. Preserve other entries when editing. Empty arrays mean **not tagged yet**.
+- New boards start with `{}`. Pasting or dropping an image adds its filename with `[]`; automatic AI tagging is not configured. Ask the agent to review and tag new references.
+- `tags.json` lives beside the original file, including for an image referenced by multiple boards. All boards display that same image's tags.
+- Tags render below each image and in the enlarged viewer. Refresh or refocus the app after editing a tag file.
+- Do not duplicate tags in `catalog.json`. Its HTTP response combines the catalog with folder-local tags for the app; the on-disk catalog holds paths and other metadata only.
+- `tags.json` files are private library data and are ignored with the entire `images/` directory.
+
+### Required tagging dimensions
+
+For every reviewed image, include all four dimensions. Keep the filename-to-array format:
+
+- **General:** unprefixed subject and medium tags, e.g. `biology`, `graphic design`, `3d rendering`.
+- **Palette:** `palette: <color>` for the dominant colors and defining accents of the scheme. Include meaningful background colors; ignore minor pixel variations. Prefer color names over speculative hex values.
+- **Signal:** `signal: <quality>` for the visual character conveyed, e.g. `scientific`, `archival`, `energetic`, `restrained`. These are visual interpretations, not claims about origin or scientific meaning.
+- **Structure:** `structure: <feature>` for composition and form, e.g. `connected nodes`, `layered contour lines`, `asymmetric composition`.
+
+Inspect new images before tagging, preserve other entries, and use consistent phrases across the library. The app displays a single horizontally scrollable tag row: general tags are neutral, palette tags blue, signal tags orange, and structure tags purple. Category names remain in tooltips and accessible labels. Tags scroll manually with a trackpad, touch, or keyboard; scrollbars are hidden and hovering does not move them. Image cells form a gapless grid with shared borders. Empty arrays still mean unreviewed.
+
+## What belongs in Git
+
+Commit `.gitignore`, `AGENTS.md`, `README.md`, `package.json`, `package-lock.json`, `index.html`, `vite.config.js`, `serve.py`, `src/`, and `server/` (including tests).
+
+The ignore rules exclude all personal boards: `images/` including every `tags.json`, `catalog.json`, and `cache/`. Dependencies, build output, logs, and local environment files are also ignored. No image placeholders or personal catalog are needed for a fresh clone.
+
+Keep a separate backup of your local library. To move a library between your own machines, copy `catalog.json` and `images/` together outside Git. Do not force-add these paths to the repository.

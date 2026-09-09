@@ -1,0 +1,19 @@
+# Personal library: never commit boards, originals, tags, or catalog metadata.
+/images/
+/catalog.json
+/catalog.json.*.tmp
+/cache/
+
+# Dependencies and generated output
+/node_modules/
+/dist/
+/coverage/
+**/__pycache__/
+*.py[cod]
+*.log
+
+# Local configuration and OS files
+.env
+.env.*
+!.env.example
+.DS_Store
